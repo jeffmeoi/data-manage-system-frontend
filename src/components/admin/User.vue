@@ -275,7 +275,6 @@ export default {
       confirm()
       this.searchText = selectedKeys[0]
     },
-
     handleReset (clearFilters) {
       clearFilters()
       this.searchText = ''

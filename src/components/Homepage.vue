@@ -186,9 +186,7 @@ export default {
         text: '登出',
         action: function () {
           http.user.logout()
-            .then((data) => {
-              $router.push({ name: 'Login' })
-            })
+          $router.push({ name: 'Login' })
         }
       },
     ]

@@ -2,6 +2,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Vue from 'vue'
 import qs from 'querystring'
+import { jxios } from 'jxios'
 
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'
 axios.defaults.headers['Accept'] = 'application/json'
@@ -11,15 +12,16 @@ axios.defaults.baseURL = '/api'
 
 Vue.use(VueAxios, axios)
 
-function httpDecorator (promise) {
+function requestDecorator (promise) {
   return promise.then(res => {
     console.log(res)
+    res = res[res.fetchType]
     if (res.status !== 200) {
       throw new Error('Network Error')
     }
     let result = res.data
     if (result.code !== 200) {
-      throw new Error(result.code + ', ' + result.msg)
+      throw new Error(result.code + '@' + result.msg)
     }
     return result.data
   })
@@ -31,50 +33,106 @@ export default {
      * @returns Promise
      */
     getRoleList: () => {
-      return httpDecorator(axios.get(`/role/list`))
+      return requestDecorator(jxios.request({
+        requestConfig: {
+          method: 'get',
+          url: `/role/list`
+        },
+        type: 'mutable'
+      }))
     },
     /**
      * @returns Promise
      */
     getRole: (id) => {
-      return httpDecorator(axios.get(`/role/${id}`))
+      return requestDecorator(jxios.request({
+        requestConfig: {
+          method: 'get',
+          url: `/role/${id}`
+        },
+        type: 'mutable'
+      }))
     },
     /**
      * @returns Promise
      */
     getRoleName: (id) => {
-      return httpDecorator(axios.get(`/role/${id}/name`))
+      return requestDecorator(jxios.request({
+        requestConfig: {
+          method: 'get',
+          url: `/role/${id}/name`
+        },
+        type: 'mutable'
+      }))
+      // return requestDecorator(axios.get(`/role/${id}/name`))
     },
   },
   type: {
     addType: (type = {}) => {
-      return httpDecorator(axios.post(`/type`, type, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
+      return requestDecorator(jxios.request({
+        requestConfig: {
+          method: 'get',
+          url: `/type`,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: type
+        },
+        type: 'mutable'
       }))
     },
     deleteType: (id) => {
-      return httpDecorator(axios.delete(`/type/${id}`))
+      return requestDecorator(jxios.request({
+        requestConfig: {
+          method: 'delete',
+          url: `/type/${id}`,
+        },
+        type: 'mutable'
+      }))
     },
     updateType: (id, type = {}) => {
-      return httpDecorator(axios.put(`/type/${id}`, type, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
+      return requestDecorator(jxios.request({
+        requestConfig: {
+          method: 'put',
+          url: `/type/${id}`,
+          data: type,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        },
+        type: 'mutable'
       }))
     },
     getType: (id) => {
-      return httpDecorator(axios.get(`/type/${id}`))
+      return requestDecorator(jxios.request({
+        requestConfig: {
+          method: 'get',
+          url: `/type/${id}`,
+        },
+        type: 'mutable'
+      }))
     },
     getTypeList: () => {
-      return httpDecorator(axios.get(`/type/list`))
+      return requestDecorator(jxios.request({
+        requestConfig: {
+          method: 'get',
+          url: `/type/list`,
+        },
+        type: 'mutable'
+      }))
     },
     /**
      * @returns Promise
      */
     getCount: () => {
-      return httpDecorator(axios.get(`/type/count`))
+      return requestDecorator(jxios.request({
+        requestConfig: {
+          method: 'get',
+          url: `/type/count`,
+        },
+        type: 'mutable'
+      }))
+      // return requestDecorator(axios.get(`/type/count`))
     },
 
   },
@@ -84,9 +142,15 @@ export default {
      * @returns Promise
      */
     addImage: (imageInfo = {}) => {
-      return httpDecorator(axios.post(`/image`, imageInfo, {
-        headers: {
-          'Content-Type': 'application/json'
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'post',
+          url: `/image`,
+          data: imageInfo,
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
       }))
     },
@@ -95,7 +159,14 @@ export default {
      * @returns Promise
      */
     deleteImage: (id) => {
-      return httpDecorator(axios.delete(`/image/${id}`))
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'delete',
+          url: `/image/${id}`,
+        }
+      }))
+      // return requestDecorator(axios.delete(`/image/${id}`))
     },
     /**
      * @param imageInfo {id, country, position, type, ppi, locationX, locationY, gatherTime, gatherDuration, scale, fileUri}
@@ -103,9 +174,15 @@ export default {
      */
     updateImage: (id, imageInfo = {}) => {
       imageInfo.id = id
-      return httpDecorator(axios.put(`/image/${id}`, imageInfo, {
-        headers: {
-          'Content-Type': 'application/json'
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'put',
+          url: `/image/${id}`,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: imageInfo
         }
       }))
     },
@@ -114,23 +191,41 @@ export default {
      * @returns Promise
      */
     getImageInfo: (id) => {
-      return httpDecorator(axios.get(`/image/${id}`))
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'get',
+          url: `/image/${id}`
+        }
+      }))
     },
     /**
      * @param filter {country, position, ppi, fromX, toX, fromY, toY, gatherTime, gatherDuration, scale}
      * @returns Promise
      */
     getImageInfoList: (params = {}) => {
-      return httpDecorator(axios.post(`/image/list`, params, {
-        headers: {
-          'Content-Type': 'application/json'
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'post',
+          url: `/image/list`,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: params
         }
       }))
     },
     uploadImage: (formData) => {
-      return httpDecorator(axios.post(`/image/upload`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'post',
+          url: `/image/upload`,
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          data: formData
         }
       }))
     },
@@ -142,7 +237,14 @@ export default {
      * @returns Promise
      */
     login: (username, password) => {
-      return httpDecorator(axios.put(`/user/login`, qs.stringify({username, password})))
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'put',
+          url: `/user/login`,
+          data: qs.stringify({username, password})
+        }
+      }))
     },
     /**
      * @param username string
@@ -150,16 +252,28 @@ export default {
      * @returns Promise
      */
     getLoginID: () => {
-      return httpDecorator(axios.get(`/user/login`))
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'get',
+          url: `/user/login`,
+        }
+      }))
     },
     /**
      * @param user {username, password, name, email}
      * @returns Promise
      */
     register: (user = {}) => {
-      return httpDecorator(axios.post(`/user/register`, user, {
-        headers: {
-          'Content-Type': 'application/json'
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'post',
+          url: `/user/register`,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: user
         }
       }))
     },
@@ -167,16 +281,28 @@ export default {
      * @returns Promise
      */
     logout: () => {
-      return httpDecorator(axios.put(`/user/logout`))
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'put',
+          url: `/user/logout`,
+        }
+      }))
     },
     /**
      * @param user {username, password, name}
      * @returns Promise
      */
     addUser: (user = {}) => {
-      return httpDecorator(axios.post(`/user`, user, {
-        headers: {
-          'Content-Type': 'application/json'
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'post',
+          url: `/user`,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: user
         }
       }))
     },
@@ -185,14 +311,26 @@ export default {
      * @returns Promise
      */
     addAdmin: (user = {}) => {
-      return httpDecorator(axios.post(`/user/admin`, user, {
-        headers: {
-          'Content-Type': 'application/json'
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'post',
+          url: `/user/admin`,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: user
         }
       }))
     },
     deleteUser: (id) => {
-      return httpDecorator(axios.delete(`/user/${id}`))
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'delete',
+          url: `/user/${id}`,
+        }
+      }))
     },
     /**
      * @param id integer
@@ -201,9 +339,15 @@ export default {
      */
     updateUser: (id, user = {}) => {
       user.id = id
-      return httpDecorator(axios.put(`/user/${id}`, user, {
-        headers: {
-          'Content-Type': 'application/json'
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'put',
+          url: `/user/${id}`,
+          data: user,
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
       }))
     },
@@ -212,16 +356,28 @@ export default {
      * @returns Promise
      */
     getUser: (id) => {
-      return httpDecorator(axios.get(`/user/${id}`))
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'get',
+          url: `/user/${id}`,
+        }
+      }))
     },
     /**
      * @param params { user, listParams }
      * @returns Promise
      */
     getUserList: (params = {}) => {
-      return httpDecorator(axios.post(`/user/list`, params, {
-        headers: {
-          'Content-Type': 'application/json'
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'post',
+          url: `/user/list`,
+          data: params,
+          headers: {
+            'Content-Type': 'application/json'
+          }
         }
       }))
     },
@@ -229,7 +385,13 @@ export default {
      * @returns Promise
      */
     getCount: () => {
-      return httpDecorator(axios.get(`/user/count`))
+      return requestDecorator(jxios.request({
+        type: 'mutable',
+        requestConfig: {
+          method: 'get',
+          url: `/user/count`,
+        }
+      }))
     },
   },
 }

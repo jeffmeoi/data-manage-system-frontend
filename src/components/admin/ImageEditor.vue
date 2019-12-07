@@ -18,7 +18,7 @@
                   <a-icon type='picture' :style="{ fontSize: '80px' }" />
                 </div>
               </div>
-              <a-upload
+              <input
                 v-decorator="['url',
                   {
                     rules: [
@@ -29,6 +29,8 @@
                     ]
                   },
                 ]"
+                type="hidden"/>
+              <a-upload
                 :style="{ paddingLeft: '16px', width: '125px' }"
                 name="image"
                 :showUploadList="false"
@@ -311,7 +313,13 @@ export default {
       if (!isLt2M) {
         this.$message.error('Image must smaller than 2MB!')
       }
-      return isJPG && isLt2M
+      this.form.validateFields((err, formData) => {
+        if (err) {
+          console.log(err)
+        }
+        console.log(formData)
+      })
+      return (isJPG || isPNG) && isLt2M
     },
     uploadImage (options) {
       this.loading = true

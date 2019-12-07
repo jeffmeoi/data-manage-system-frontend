@@ -8,8 +8,39 @@
       <router-link to="image_editor"><a-button class="editable-add-btn" type="primary">Add</a-button></router-link>
       <a-button  @click="showBatchModal" class="editable-add-btn">Batch Add</a-button>
       <a-table :loading="loading" :columns="columns" :dataSource="data" :rowKey="record=>record.id" @change="handleTableChange" :pagination="pagination">
-        <a slot="image" slot-scope="text" href="javascript:">
-          <img @click="(e)=>openPhotoModal(host + text)" class="photo-image" :src="host + text"/>
+        <div
+          slot="filterDropdown"
+          slot-scope="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }"
+          style="padding: 8px"
+        >
+          <a-input
+            v-ant-ref="c => searchInput = c"
+            :placeholder="`Search ${column.dataIndex}`"
+            :value="selectedKeys[0]"
+            @change="e => setSelectedKeys(e.target.value ? [e.target.value] : [])"
+            @pressEnter="() => handleSearch(selectedKeys, confirm)"
+            style="width: 188px; margin-bottom: 8px; display: block;"
+          />
+          <a-button
+            type="primary"
+            @click="() => handleSearch(selectedKeys, confirm)"
+            icon="search"
+            size="small"
+            style="width: 90px; margin-right: 8px"
+            >Search</a-button
+          >
+          <a-button @click="() => handleReset(clearFilters)" size="small" style="width: 90px"
+            >Reset</a-button
+          >
+        </div>
+        <a-icon
+          slot="filterIcon"
+          slot-scope="filtered"
+          type="search"
+          :style="{ color: filtered ? '#108ee9' : undefined }"
+        />
+        <a slot="image" slot-scope="text, record" href="javascript:">
+          <img @click="(e)=>openPhotoModal(host + record.url)" class="photo-image" :src="host + record.thumbUrl"/>
         </a>
         <span slot="customTitle"><a-icon type="smile-o" /> Name</span>
         <span slot="action" slot-scope="record">
@@ -67,11 +98,21 @@ const columns = [
     title: 'Country',
     dataIndex: 'country',
     key: 'country',
+    scopedSlots: {
+      filterDropdown: 'filterDropdown',
+      filterIcon: 'filterIcon',
+      customRender: 'customRender',
+    },
   },
   {
     title: 'Position',
     dataIndex: 'position',
     key: 'position',
+    scopedSlots: {
+      filterDropdown: 'filterDropdown',
+      filterIcon: 'filterIcon',
+      customRender: 'customRender',
+    },
   },
   {
     title: 'Type',
@@ -82,11 +123,21 @@ const columns = [
     title: '创建者ID',
     dataIndex: 'userID',
     key: 'userID',
+    scopedSlots: {
+      filterDropdown: 'filterDropdown',
+      filterIcon: 'filterIcon',
+      customRender: 'customRender',
+    },
   },
   {
     title: '创建时间',
     dataIndex: 'createTime',
     key: 'createTime',
+    scopedSlots: {
+      filterDropdown: 'filterDropdown',
+      filterIcon: 'filterIcon',
+      customRender: 'customRender',
+    },
   },
   {
     title: 'Action',
@@ -135,9 +186,9 @@ export default {
       const pager = { ...this.pagination }
       pager.current = pagination.current
       this.pagination = pager
-      let user = {}
+      let imageFilterParams = {}
       for (let item in filters) {
-        user[item] = filters[item][0]
+        imageFilterParams[item] = filters[item][0]
       }
       this.fetch({
         listParams: {
@@ -146,7 +197,7 @@ export default {
           sortField: sorter.field,
           sortOrder: sorter.order,
         },
-        user
+        imageFilterParams
       })
     },
     handleBatchOK (e) {
@@ -243,6 +294,14 @@ export default {
     openPhotoModal (imageUrl) {
       this.visibleModal = true
       this.imageUrl = imageUrl
+    },
+    handleSearch (selectedKeys, confirm) {
+      confirm()
+      this.searchText = selectedKeys[0]
+    },
+    handleReset (clearFilters) {
+      clearFilters()
+      this.searchText = ''
     },
   }
 }
