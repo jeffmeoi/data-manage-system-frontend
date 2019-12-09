@@ -131,7 +131,7 @@
         <a-form-item label="比例尺" v-bind="formItemLayout">
           <span class="a-form-text">{{imageDetails.scale}}</span>
         </a-form-item>
-        <a-form-item label="用户ID" v-bind="formItemLayout">
+        <a-form-item :label="strings.userID" v-bind="formItemLayout">
           <span class="a-form-text">{{imageDetails.userID}}</span>
         </a-form-item>
         <a-form-item label="图像链接" v-bind="formItemLayout">
@@ -160,6 +160,7 @@
 <script>
 import http from '@/HttpConnector'
 import values from '@/values'
+import strings from '@/strings'
 const formItemLayout = {
   labelCol: {
     xs: { span: 20 },
@@ -190,7 +191,7 @@ export default {
         }
       },
     ]
-    return {
+    return Object.assign({
       footerText: '信息管理系统 ©2019 Created by Jeff Xie',
       host: values.host,
       visibleDrawer: false,
@@ -210,8 +211,9 @@ export default {
         'tab 1',
         'tab 2',
         'tab 3',
-      ]
-    }
+      ],
+      strings: strings.zh
+    })
   },
   mounted () {
     http.user.getLoginID()

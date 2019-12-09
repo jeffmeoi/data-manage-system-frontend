@@ -14,7 +14,7 @@
               <div class="login-card">
                 <h1 :style="{marginBottom: '40px', fontSize: '44px'}">欢迎登录</h1>
                 <a-form :form="form" @submit="handleSubmit">
-                  <a-form-item label="Username">
+                  <a-form-item :label="strings.username">
                     <a-input
                       size="large"
                       v-decorator="[
@@ -28,7 +28,7 @@
                           ],
                         },
                       ]"
-                      placeholder="Username"
+                      :placeholder="strings.username"
                     >
                       <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)" />
                     </a-input>
@@ -90,6 +90,7 @@
 
 <script>
 import http from '@/HttpConnector'
+import strings from '@/strings'
 export default {
   name: 'Login',
   data () {
@@ -98,6 +99,8 @@ export default {
       wrapperCol: { span: 20 },
       footerText: '信息管理系统 ©2019 Created by Jeff Xie',
       headline: '信息管理系统',
+    }, {
+      strings: strings.zh
     })
   },
   beforeCreate () {
