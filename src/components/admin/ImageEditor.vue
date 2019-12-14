@@ -2,15 +2,15 @@
   <div>
     <a-breadcrumb style="margin: 16px 0;">
       <a-breadcrumb-item>
-        <router-link to="image_info">卫星图像</router-link>
+        <router-link to="image_info">Images</router-link>
       </a-breadcrumb-item>
-      <a-breadcrumb-item>编辑信息</a-breadcrumb-item>
+      <a-breadcrumb-item>Image Editor</a-breadcrumb-item>
     </a-breadcrumb>
     <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
-      <h1>编辑信息</h1>
+      <h1>Image Editor</h1>
       <div :style="{ width: '70%', minWidth: '600px' }">
         <a-form  :form="form" @submit="handleSubmit">
-          <a-form-item label="图像" v-bind="formItemLayout">
+          <a-form-item label="Image" v-bind="formItemLayout">
             <a-card style="width: 325px;" :bodyStyle="{ display: 'flex', flexDirection: 'row', alignItems: 'center'}">
               <img v-if="imageDetails.thumbUrl" @click="(e)=>openPhotoModal(host + imageDetails.url)" class="photo-image" :src="host + imageDetails.thumbUrl"/>
               <div v-else :style="{}">
@@ -43,10 +43,10 @@
               </a-upload>
             </a-card>
           </a-form-item>
-          <a-form-item v-if="imageID" label="图像ID" v-bind="formItemLayout">
+          <a-form-item v-if="imageID" label="Image ID" v-bind="formItemLayout">
             <span class="a-form-text">{{imageDetails.id}}</span>
           </a-form-item>
-          <a-form-item label="类型" v-bind="formItemLayout">
+          <a-form-item label="Category" v-bind="formItemLayout">
             <a-select
               v-decorator="[
                 'type',
@@ -62,7 +62,7 @@
               </a-select-option>
             </a-select>
           </a-form-item>
-          <a-form-item label="国别" v-bind="formItemLayout">
+          <a-form-item label="Country" v-bind="formItemLayout">
             <a-input
               v-decorator="[
                 'country',
@@ -79,7 +79,7 @@
               placeholder="Country"
             />
           </a-form-item>
-          <a-form-item label="具体位置" v-bind="formItemLayout">
+          <a-form-item label="Specific Location" v-bind="formItemLayout">
             <a-input
               v-decorator="[
                 'position',
@@ -96,7 +96,7 @@
               placeholder="Position"
             />
           </a-form-item>
-          <a-form-item label="分辨率" v-bind="formItemLayout">
+          <a-form-item label="Resolution Ratio" v-bind="formItemLayout">
             <a-input-number :min="0" :max="10000" :step="0.1"  style="width: 200px;"
               v-decorator="[ 'ppi',
                 {
@@ -104,14 +104,14 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your PPi!',
+                      message: 'Please Input Resolution Ratio!',
                     },
                   ]
                 },
               ]"
             />
           </a-form-item>
-          <a-form-item label="经度" v-bind="formItemLayout">
+          <a-form-item label="Longitude" v-bind="formItemLayout">
             <a-input-number :min="-180" :max="180" :step="0.1"  style="width: 200px;"
               v-decorator="[ 'longitude',
                 {
@@ -119,14 +119,14 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your Longitude!',
+                      message: 'Please Input Longitude!',
                     },
                   ]
                 },
               ]"
             />
           </a-form-item>
-          <a-form-item label="纬度" v-bind="formItemLayout">
+          <a-form-item label="Latitude" v-bind="formItemLayout">
             <a-input-number :min="-90" :max="90" :step="0.1" style="width: 200px;"
               v-decorator="[ 'latitude',
                 {
@@ -134,14 +134,14 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your Latitude!',
+                      message: 'Please input Latitude!',
                     },
                   ]
                 },
               ]"
             />
           </a-form-item>
-          <a-form-item label="采集时间" v-bind="formItemLayout">
+          <a-form-item label="Acquisition Date" v-bind="formItemLayout">
             <a-date-picker
               v-decorator="[ 'gatherTime',
                 {
@@ -149,14 +149,14 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your Gather Time!',
+                      message: 'Please Input Acquisition Date!',
                     },
                   ]
                 }
               ]"
             />
           </a-form-item>
-          <a-form-item label="采集时长" v-bind="formItemLayout">
+          <a-form-item label="Acquisition Time" v-bind="formItemLayout">
             <a-input-number :min="0" :max="1000" :step="0.1"  style="width: 200px;"
               v-decorator="[ 'gatherDuration',
                 {
@@ -164,14 +164,14 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your Gather Duration!',
+                      message: 'Please Input Acquisition Time!',
                     },
                   ]
                 },
               ]"
             />
           </a-form-item>
-          <a-form-item label="比例尺" v-bind="formItemLayout">
+          <a-form-item label="Scale" v-bind="formItemLayout">
             <a-input-number :min="0" :max="100" :step="0.1"  style="width: 200px;"
               v-decorator="[ 'scale',
                 {
@@ -179,20 +179,20 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your Scale!',
+                      message: 'Please Input Scale!',
                     },
                   ]
                 },
               ]"
             />
           </a-form-item>
-          <a-form-item v-if="imageID" label="用户ID" v-bind="formItemLayout">
+          <a-form-item v-if="imageID" label="User ID" v-bind="formItemLayout">
             <span class="a-form-text">{{imageDetails.userID}}</span>
           </a-form-item>
-          <a-form-item v-if="imageID" label="创建时间" v-bind="formItemLayout">
+          <a-form-item v-if="imageID" label="Create Time" v-bind="formItemLayout">
             <span class="a-form-text">{{imageDetails.createTime}}</span>
           </a-form-item>
-          <a-form-item v-if="imageID" label="更新时间" v-bind="formItemLayout">
+          <a-form-item v-if="imageID" label="Update Time" v-bind="formItemLayout">
             <span class="a-form-text">{{imageDetails.updateTime}}</span>
           </a-form-item>
           <a-form-item :wrapper-col="{ span: 12, offset: 8 }">
@@ -281,7 +281,7 @@ export default {
         if (this.imageID == null) {
           http.image.addImage(params)
             .then(res => {
-              this.$message.success('创建成功！')
+              this.$message.success('create successfully!')
               this.$router.push({
                 name: 'Admin',
                 params: {
@@ -292,7 +292,7 @@ export default {
         } else {
           http.image.updateImage(this.imageID, params)
             .then(res => {
-              this.$message.success('修改成功！')
+              this.$message.success('modify successfully!')
               this.$router.push({
                 name: 'Admin',
                 params: {
@@ -334,7 +334,7 @@ export default {
           this.imageDetails = imageDetails
           this.loading = false
           this.form.setFieldsValue({ url: res })
-          this.$message.success('图片上传成功！')
+          this.$message.success('Image Uploaded Successfully')
         })
     },
     normFile (e) {

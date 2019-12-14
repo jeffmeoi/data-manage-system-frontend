@@ -2,18 +2,18 @@
   <div>
     <a-breadcrumb style="margin: 16px 0;">
       <a-breadcrumb-item>
-        <router-link to="user">用户管理</router-link>
+        <router-link to="user">Users</router-link>
       </a-breadcrumb-item>
-      <a-breadcrumb-item>编辑信息</a-breadcrumb-item>
+      <a-breadcrumb-item>User Editor</a-breadcrumb-item>
     </a-breadcrumb>
     <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
-      <h1>编辑信息</h1>
+      <h1>User Editor</h1>
       <div :style="{ width: '70%', minWidth: '600px' }">
         <a-form :form="form" @submit="handleSubmit">
-          <a-form-item v-if="userID" label="用户ID" v-bind="formItemLayout">
+          <a-form-item v-if="userID" label="User ID" v-bind="formItemLayout">
             <span class="a-form-text">{{userDetails.id}}</span>
           </a-form-item>
-          <a-form-item label="用户名" v-bind="formItemLayout">
+          <a-form-item label="Username" v-bind="formItemLayout">
             <a-input
               v-decorator="[
                 'username',
@@ -30,7 +30,7 @@
               placeholder="Username"
             />
           </a-form-item>
-          <a-form-item v-if="userID == null" label="密码" v-bind="formItemLayout">
+          <a-form-item v-if="userID == null" label="Password" v-bind="formItemLayout">
             <a-input
               v-decorator="[
                 'password',
@@ -48,7 +48,7 @@
               placeholder="Password"
             />
           </a-form-item>
-          <a-form-item label="姓名" v-bind="formItemLayout">
+          <a-form-item label="Name" v-bind="formItemLayout">
             <a-input
               v-decorator="[
                 'name',
@@ -65,7 +65,7 @@
               placeholder="Name"
             />
           </a-form-item>
-          <a-form-item label="邮箱" v-bind="formItemLayout">
+          <a-form-item label="E-mail" v-bind="formItemLayout">
             <a-input
               v-decorator="[
                 'email',
@@ -82,7 +82,7 @@
               placeholder="E-mail"
             />
           </a-form-item>
-          <a-form-item label="身份" v-bind="formItemLayout">
+          <a-form-item label="Identity" v-bind="formItemLayout">
             <a-select
               v-decorator="[
                 'status',
@@ -98,13 +98,13 @@
               </a-select-option>
             </a-select>
           </a-form-item>
-          <a-form-item v-if="userID" label="创建者ID" v-bind="formItemLayout">
-            <span class="a-form-text">{{userDetails.creatorID ? userDetails.creatorID : '无'}}</span>
+          <a-form-item v-if="userID" label="Creator ID" v-bind="formItemLayout">
+            <span class="a-form-text">{{userDetails.creatorID ? userDetails.creatorID : 'None'}}</span>
           </a-form-item>
-          <a-form-item v-if="userID" label="创建时间" v-bind="formItemLayout">
+          <a-form-item v-if="userID" label="Create Time" v-bind="formItemLayout">
             <span class="a-form-text">{{userDetails.createTime}}</span>
           </a-form-item>
-          <a-form-item v-if="userID" label="更新时间" v-bind="formItemLayout">
+          <a-form-item v-if="userID" label="Update Time" v-bind="formItemLayout">
             <span class="a-form-text">{{userDetails.updateTime}}</span>
           </a-form-item>
           <a-form-item :wrapper-col="{ span: 12, offset: 8 }">
@@ -180,7 +180,7 @@ export default {
           http.user.updateUser(this.userID, formData)
             .then(res => {
               console.log(res)
-              this.$message.success('修改成功！')
+              this.$message.success('Modify Successfully!')
               this.$router.push({
                 name: 'Admin',
                 params: {
@@ -192,7 +192,7 @@ export default {
           http.user.addUser(formData)
             .then(res => {
               console.log(res)
-              this.$message.success('创建成功！')
+              this.$message.success('Create Successfully!')
               this.$router.push({
                 name: 'Admin',
                 params: {

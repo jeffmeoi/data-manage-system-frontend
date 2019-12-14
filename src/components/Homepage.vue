@@ -18,7 +18,7 @@
     <a-layout>
       <a-layout-content :style="{ background: 'white', marginLeft: '16px'}">
         <div class="gallery">
-          <a-card v-for="(item) in data" :key="item.id" size="small"  hoverable style="width: 240px; margin: 10px;">
+          <a-card v-for="(item) in data" :key="item.id" size="small"  hoverable style="width: 240px; margin: 10px; display:flex; justify-content: center; align-items: center;">
             <img @click="()=>openPhotoDrawer(item)" slot="cover" :src="host + item.thumbUrl" />
           </a-card>
         </div>
@@ -37,44 +37,44 @@
       <a-layout-sider width="400" theme="light">
         <div :style="{ width: '100%', padding: '20px' }">
           <a-form layout="vertical" :form="form" @submit="handleSubmit" hideRequiredMark>
-            <a-form-item label="类型" v-bind="formItemLayout">
+            <a-form-item label="Category" v-bind="formItemLayout">
               <a-select v-decorator="['type']" allowClear>
                 <a-select-option v-for="(item) in types" :value="item.name" :key="item.id">
                   {{item.name}}
                 </a-select-option>
               </a-select>
             </a-form-item>
-            <a-form-item label="国别" v-bind="formItemLayout">
+            <a-form-item label="Country" v-bind="formItemLayout">
               <a-input v-decorator="['country']">
               </a-input>
             </a-form-item>
-            <a-form-item label="具体位置" v-bind="formItemLayout">
+            <a-form-item label="Specific Location" v-bind="formItemLayout">
               <a-input v-decorator="['position']" ></a-input>
             </a-form-item>
-            <a-form-item label="分辨率 " v-bind="formItemLayout">
+            <a-form-item label="Resolution Ratio " v-bind="formItemLayout">
               <a-input-number :style="{width: '80px'}" :min="0" :max="10000" :step="0.1" v-decorator="[ 'fromPPi' ]" />
                 -
               <a-input-number :style="{width: '80px'}" :min="0" :max="10000" :step="0.1" v-decorator="[ 'toPPi' ]"/>
             </a-form-item>
-            <a-form-item label="经度 " v-bind="formItemLayout">
+            <a-form-item label="Longitude" v-bind="formItemLayout">
               <a-input-number :style="{width: '80px'}" :min="-180" :max="180" :step="0.1" v-decorator="[ 'fromX' ]" />
                 -
               <a-input-number :style="{width: '80px'}" :min="-180" :max="180" :step="0.1" v-decorator="[ 'toX' ]"/>
             </a-form-item>
-            <a-form-item label="维度" v-bind="formItemLayout">
+            <a-form-item label="Latitude" v-bind="formItemLayout">
               <a-input-number :style="{width: '80px'}" :min="-90" :max="90" :step="0.1" v-decorator="[ 'fromY' ]" />
                 -
               <a-input-number :style="{width: '80px'}" :min="-90" :max="90" :step="0.1" v-decorator="[ 'toY' ]" />
             </a-form-item>
-            <a-form-item label="采集时间" v-bind="formItemLayout">
+            <a-form-item label="Acquisition Date" v-bind="formItemLayout">
               <a-date-picker v-decorator="[ 'gatherTime']" />
             </a-form-item>
-            <a-form-item label="采集时长" v-bind="formItemLayout">
+            <a-form-item label="Acquisition Time" v-bind="formItemLayout">
               <a-input-number :style="{width: '80px'}" :min="0" :max="1000" :step="0.1" v-decorator="[ 'fromDuration' ]" />
                 -
               <a-input-number :style="{width: '80px'}" :min="0" :max="1000" :step="0.1" v-decorator="[ 'toDuration' ]" />
             </a-form-item>
-            <a-form-item label="比例尺" v-bind="formItemLayout">
+            <a-form-item label="Scale" v-bind="formItemLayout">
               <a-input-number :style="{width: '80px'}" :min="0" :max="100" :step="0.1" v-decorator="[ 'fromScale' ]" />
                 -
               <a-input-number :style="{width: '80px'}" :min="0" :max="100" :step="0.1" v-decorator="[ 'toScale' ]" />
@@ -101,40 +101,40 @@
       :wrapStyle="{height: 'calc(100% - 108px)',overflow: 'auto',paddingBottom: '108px'}"
     >
       <a-form layout="vertical"  >
-        <a-form-item label="图像" v-bind="formItemLayout">
+        <a-form-item label="Image" v-bind="formItemLayout">
           <a @click="(e)=>openPhotoModal(host + imageDetails.url)"><img class="phooto-image" :src="host + imageDetails.thumbUrl"/></a>
         </a-form-item>
-        <a-form-item label="类型" v-bind="formItemLayout">
+        <a-form-item label="Category" v-bind="formItemLayout">
           <span class="a-form-text">{{imageDetails.type}}</span>
         </a-form-item>
-        <a-form-item label="国别" v-bind="formItemLayout">
+        <a-form-item label="Country" v-bind="formItemLayout">
           <span class="a-form-text">{{imageDetails.country}}</span>
         </a-form-item>
-        <a-form-item label="具体位置" v-bind="formItemLayout">
+        <a-form-item label="Specific Location" v-bind="formItemLayout">
           <span class="a-form-text">{{imageDetails.position}}</span>
         </a-form-item>
-        <a-form-item label="分辨率" v-bind="formItemLayout">
+        <a-form-item label="Resolution Ratio" v-bind="formItemLayout">
           <span class="a-form-text">{{imageDetails.ppi}}</span>
         </a-form-item>
-        <a-form-item label="经度" v-bind="formItemLayout">
+        <a-form-item label="Longitude" v-bind="formItemLayout">
           <span class="a-form-text">{{imageDetails.longitude}}</span>
         </a-form-item>
-        <a-form-item label="维度" v-bind="formItemLayout">
+        <a-form-item label="Latitude" v-bind="formItemLayout">
           <span class="a-form-text">{{imageDetails.latitude}}</span>
         </a-form-item>
-        <a-form-item label="采集时间" v-bind="formItemLayout">
+        <a-form-item label="Acquisition Date" v-bind="formItemLayout">
           <span class="a-form-text">{{imageDetails.gatherTime}}</span>
         </a-form-item>
-        <a-form-item label="采集时长" v-bind="formItemLayout">
+        <a-form-item label="Acquisition Time" v-bind="formItemLayout">
           <span class="a-form-text">{{imageDetails.gatherDuration}}</span>
         </a-form-item>
-        <a-form-item label="比例尺" v-bind="formItemLayout">
+        <a-form-item label="Scale" v-bind="formItemLayout">
           <span class="a-form-text">{{imageDetails.scale}}</span>
         </a-form-item>
         <a-form-item :label="strings.userID" v-bind="formItemLayout">
           <span class="a-form-text">{{imageDetails.userID}}</span>
         </a-form-item>
-        <a-form-item label="图像链接" v-bind="formItemLayout">
+        <a-form-item label="Image Link" v-bind="formItemLayout">
           <a class="a-form-text" :href="host + imageDetails.url" target="_blank">{{host + imageDetails.url}}</a>
         </a-form-item>
       </a-form>
@@ -184,7 +184,7 @@ export default {
     let $router = this.$router
     const userMenuItems = [
       {
-        text: '登出',
+        text: 'Log out',
         action: function () {
           http.user.logout()
           $router.push({ name: 'Login' })
@@ -192,7 +192,7 @@ export default {
       },
     ]
     return Object.assign({
-      footerText: '信息管理系统 ©2019 Created by Jeff Xie',
+      footerText: 'Image Information Manage System ©2019 Created by Jeff Xie',
       host: values.host,
       visibleDrawer: false,
       visibleModal: false,
@@ -225,7 +225,7 @@ export default {
         let $router = this.$router
         if (res.status === 1) {
           this.userMenuItems.unshift({
-            text: '后台管理系统',
+            text: 'Backstage',
             action: function () {
               $router.push({ name: 'Admin' })
             }

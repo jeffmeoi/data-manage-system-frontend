@@ -1,10 +1,10 @@
 <template>
   <div>
     <a-breadcrumb style="margin: 16px 0">
-      <a-breadcrumb-item>卫星图像</a-breadcrumb-item>
+      <a-breadcrumb-item>Images</a-breadcrumb-item>
     </a-breadcrumb>
     <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
-      <h1>卫星图像</h1>
+      <h1>Images</h1>
       <router-link to="image_editor"><a-button class="editable-add-btn" type="primary">Add</a-button></router-link>
       <a-button  @click="showBatchModal" class="editable-add-btn">Batch Add</a-button>
       <a-table :loading="loading" :columns="columns" :dataSource="data" :rowKey="record=>record.id" @change="handleTableChange" :pagination="pagination">
@@ -84,12 +84,12 @@ import http from '@/HttpConnector'
 import values from '@/values'
 const columns = [
   {
-    title: '图像ID',
+    title: 'Image ID',
     dataIndex: 'id',
     key: 'id',
   },
   {
-    title: '图像',
+    title: 'Image',
     dataIndex: 'thumbUrl',
     scopedSlots: { customRender: 'image' },
     key: 'image',
@@ -105,7 +105,7 @@ const columns = [
     },
   },
   {
-    title: 'Position',
+    title: 'Specific Location',
     dataIndex: 'position',
     key: 'position',
     scopedSlots: {
@@ -115,12 +115,12 @@ const columns = [
     },
   },
   {
-    title: 'Type',
+    title: 'Category',
     dataIndex: 'type',
     key: 'type',
   },
   {
-    title: '创建者ID',
+    title: 'Creator ID',
     dataIndex: 'userID',
     key: 'userID',
     scopedSlots: {
@@ -130,7 +130,7 @@ const columns = [
     },
   },
   {
-    title: '创建时间',
+    title: 'Create Time',
     dataIndex: 'createTime',
     key: 'createTime',
     scopedSlots: {
@@ -208,19 +208,21 @@ export default {
       const { fileList } = batchModal
       const formData = new FormData()
       fileList.forEach(file => {
-        formData.append('files[]', file)
+        formData.append('files', file)
       })
       this.batchModal = batchModal
       console.log(fileList)
-      setTimeout(() => {
-        let batchModal = {...this.batchModal}
-        batchModal.uploading = false
-        batchModal.visible = false
-        batchModal.loading = false
-        batchModal.text = 'import photos from excel file:'
-        this.batchModal = batchModal
-        this.$message.success('upload successfully.')
-      }, 2000)
+      http.image.addImages(formData)
+        .then(res => {
+          let batchModal = {...this.batchModal}
+          batchModal.uploading = false
+          batchModal.visible = false
+          batchModal.loading = false
+          batchModal.text = 'import images from excel file:'
+          this.batchModal = batchModal
+          this.$message.success('upload successfully.')
+          this.fetch()
+        })
     },
     handleBatchCancel (e) {
       let batchModal = {...this.batchModal}
@@ -254,7 +256,7 @@ export default {
     confirmDelete (id) {
       http.image.deleteImage(id)
         .then(res => {
-          this.$message.success('删除成功')
+          this.$message.success('Delete Successfully')
           this.fetch()
         })
     },

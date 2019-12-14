@@ -12,7 +12,7 @@
           <a-layout>
             <a-layout-content :style="{ background: 'white' , paddingBottom: '150px'}">
               <div class="login-card">
-                <h1 :style="{marginBottom: '40px', fontSize: '44px'}">欢迎登录</h1>
+                <h1 :style="{marginBottom: '40px', fontSize: '44px'}">Welcome To Login</h1>
                 <a-form :form="form" @submit="handleSubmit">
                   <a-form-item :label="strings.username">
                     <a-input
@@ -97,8 +97,8 @@ export default {
     return Object.assign({
       labelCol: { span: 4 },
       wrapperCol: { span: 20 },
-      footerText: '信息管理系统 ©2019 Created by Jeff Xie',
-      headline: '信息管理系统',
+      footerText: 'Image Information Manage System ©2019 Created by Jeff Xie',
+      headline: 'Image Information Manage System',
     }, {
       strings: strings.zh
     })

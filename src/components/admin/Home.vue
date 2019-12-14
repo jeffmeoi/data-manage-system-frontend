@@ -1,14 +1,14 @@
 <template>
   <div>
     <a-breadcrumb style="margin: 16px 0;">
-      <a-breadcrumb-item>概况</a-breadcrumb-item>
+      <a-breadcrumb-item>Survey</a-breadcrumb-item>
     </a-breadcrumb>
     <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
-      <h1>概况</h1>
-      <h2>类别统计</h2>
+      <h1>Survey</h1>
+      <h2>Category Statistics</h2>
       <a-table :columns="imageColumns" :dataSource="imageData" :rowKey="(record, index)=>index">
       </a-table>
-      <h2>用户统计</h2>
+      <h2>User Statistics</h2>
       <a-table :columns="userColumns" :dataSource="userData" :rowKey="(record, index)=>index">
       </a-table>
     </div>

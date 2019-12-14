@@ -78,7 +78,7 @@ export default {
           },
           data: type
         },
-        type: 'mutable'
+        type: 'normal'
       }))
     },
     deleteType: (id) => {
@@ -87,7 +87,7 @@ export default {
           method: 'delete',
           url: `/type/${id}`,
         },
-        type: 'mutable'
+        type: 'normal'
       }))
     },
     updateType: (id, type = {}) => {
@@ -100,7 +100,7 @@ export default {
             'Content-Type': 'application/json'
           }
         },
-        type: 'mutable'
+        type: 'normal'
       }))
     },
     getType: (id) => {
@@ -134,7 +134,22 @@ export default {
       }))
       // return requestDecorator(axios.get(`/type/count`))
     },
-
+    /**
+     * @param formData
+     */
+    addTypes: (formData) => {
+      return requestDecorator(jxios.request({
+        type: 'normal',
+        requestConfig: {
+          method: 'post',
+          url: `/type/batch`,
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          data: formData
+        }
+      }))
+    },
   },
   image: {
     /**
@@ -143,7 +158,7 @@ export default {
      */
     addImage: (imageInfo = {}) => {
       return requestDecorator(jxios.request({
-        type: 'mutable',
+        type: 'normal',
         requestConfig: {
           method: 'post',
           url: `/image`,
@@ -160,7 +175,7 @@ export default {
      */
     deleteImage: (id) => {
       return requestDecorator(jxios.request({
-        type: 'mutable',
+        type: 'normal',
         requestConfig: {
           method: 'delete',
           url: `/image/${id}`,
@@ -175,7 +190,7 @@ export default {
     updateImage: (id, imageInfo = {}) => {
       imageInfo.id = id
       return requestDecorator(jxios.request({
-        type: 'mutable',
+        type: 'normal',
         requestConfig: {
           method: 'put',
           url: `/image/${id}`,
@@ -216,12 +231,31 @@ export default {
         }
       }))
     },
+    /**
+     * @param formData
+     */
     uploadImage: (formData) => {
       return requestDecorator(jxios.request({
         type: 'mutable',
         requestConfig: {
           method: 'post',
           url: `/image/upload`,
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          data: formData
+        }
+      }))
+    },
+    /**
+     * @param formData
+     */
+    addImages: (formData) => {
+      return requestDecorator(jxios.request({
+        type: 'normal',
+        requestConfig: {
+          method: 'post',
+          url: `/image/batch`,
           headers: {
             'Content-Type': 'multipart/form-data'
           },
@@ -295,7 +329,7 @@ export default {
      */
     addUser: (user = {}) => {
       return requestDecorator(jxios.request({
-        type: 'mutable',
+        type: 'normal',
         requestConfig: {
           method: 'post',
           url: `/user`,
@@ -307,12 +341,28 @@ export default {
       }))
     },
     /**
+     * @param formData
+     */
+    addUsers: (formData) => {
+      return requestDecorator(jxios.request({
+        type: 'normal',
+        requestConfig: {
+          method: 'post',
+          url: `/user/batch`,
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          data: formData
+        }
+      }))
+    },
+    /**
      * @param user {username, password, name}
      * @returns Promise
      */
     addAdmin: (user = {}) => {
       return requestDecorator(jxios.request({
-        type: 'mutable',
+        type: 'normal',
         requestConfig: {
           method: 'post',
           url: `/user/admin`,
@@ -325,7 +375,7 @@ export default {
     },
     deleteUser: (id) => {
       return requestDecorator(jxios.request({
-        type: 'mutable',
+        type: 'normal',
         requestConfig: {
           method: 'delete',
           url: `/user/${id}`,
@@ -340,7 +390,7 @@ export default {
     updateUser: (id, user = {}) => {
       user.id = id
       return requestDecorator(jxios.request({
-        type: 'mutable',
+        type: 'normal',
         requestConfig: {
           method: 'put',
           url: `/user/${id}`,

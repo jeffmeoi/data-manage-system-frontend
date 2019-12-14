@@ -1,10 +1,10 @@
 <template>
   <div>
     <a-breadcrumb style="margin: 16px 0">
-      <a-breadcrumb-item>图像类别</a-breadcrumb-item>
+      <a-breadcrumb-item>Types</a-breadcrumb-item>
     </a-breadcrumb>
     <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
-      <h1>图像类别</h1>
+      <h1>Types</h1>
       <a-button  @click="showAddModal" class="editable-add-btn" type="primary">Add</a-button>
       <a-button  @click="showBatchModal" class="editable-add-btn">Batch Add</a-button>
       <a-table :loading="loading" :columns="columns" :dataSource="data" :rowKey="record=>record.id" :pagination="false">
@@ -217,19 +217,21 @@ export default {
       const { fileList } = batchModal
       const formData = new FormData()
       fileList.forEach(file => {
-        formData.append('files[]', file)
+        formData.append('files', file)
       })
       this.batchModal = batchModal
       console.log(fileList)
-      setTimeout(() => {
-        let batchModal = {...this.batchModal}
-        batchModal.uploading = false
-        batchModal.visible = false
-        batchModal.loading = false
-        batchModal.text = 'import types from excel file:'
-        this.batchModal = batchModal
-        this.$message.success('upload successfully.')
-      }, 2000)
+      http.type.addTypes(formData)
+        .then(res => {
+          let batchModal = {...this.batchModal}
+          batchModal.uploading = false
+          batchModal.visible = false
+          batchModal.loading = false
+          batchModal.text = 'import types from excel file:'
+          this.batchModal = batchModal
+          this.$message.success('upload successfully.')
+          this.fetch()
+        })
     },
     handleBatchCancel (e) {
       let batchModal = {...this.batchModal}
@@ -263,7 +265,7 @@ export default {
     confirmDelete (id) {
       http.type.deleteType(id)
         .then(res => {
-          this.$message.success('删除成功！')
+          this.$message.success('Delete Successfully!')
           this.fetch()
         })
     },
@@ -292,7 +294,7 @@ export default {
         this.cacheData = newData.map(item => ({ ...item }))
         http.type.updateType(id, target)
           .then(res => {
-            this.$message.success('修改成功！')
+            this.$message.success('Modify Successfully!')
           })
       }
     },

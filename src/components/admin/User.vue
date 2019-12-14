@@ -1,10 +1,10 @@
 <template>
   <div>
     <a-breadcrumb style="margin: 16px 0">
-      <a-breadcrumb-item>用户管理</a-breadcrumb-item>
+      <a-breadcrumb-item>Users</a-breadcrumb-item>
     </a-breadcrumb>
     <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
-      <h1>用户管理</h1>
+      <h1>Users</h1>
       <router-link to="user_editor"><a-button class="editable-add-btn" type="primary">Add</a-button></router-link>
       <a-button  @click="showBatchModal" class="editable-add-btn">Batch Add</a-button>
       <a-table
@@ -169,19 +169,21 @@ export default {
       const { fileList } = batchModal
       const formData = new FormData()
       fileList.forEach(file => {
-        formData.append('files[]', file)
+        formData.append('files', file)
       })
       this.batchModal = batchModal
       console.log(fileList)
-      setTimeout(() => {
-        let batchModal = {...this.batchModal}
-        batchModal.uploading = false
-        batchModal.visible = false
-        batchModal.loading = false
-        batchModal.text = 'import users from excel file:'
-        this.batchModal = batchModal
-        this.$message.success('upload successfully.')
-      }, 2000)
+      http.user.addUsers(formData)
+        .then(res => {
+          let batchModal = {...this.batchModal}
+          batchModal.uploading = false
+          batchModal.visible = false
+          batchModal.loading = false
+          batchModal.text = 'import users from excel file:'
+          this.batchModal = batchModal
+          this.$message.success('upload successfully.')
+          this.fetch()
+        })
     },
     handleBatchCancel (e) {
       let batchModal = {...this.batchModal}
@@ -215,7 +217,7 @@ export default {
     confirmDelete (id) {
       http.user.deleteUser(id)
         .then(res => {
-          this.$message.success('删除成功！')
+          this.$message.success('Delete Successfully!')
           this.fetch()
         })
     },

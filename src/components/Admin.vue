@@ -1,12 +1,12 @@
 <template>
   <a-layout id="components-layout-demo-side" style="min-height: 100vh">
     <a-layout-sider collapsible v-model="collapsed">
-      <div class="logo" >{{collapsed? '后台' : '后台管理系统'}}</div>
+      <div class="logo" >{{collapsed? 'B' : 'Backstage'}}</div>
       <a-menu theme="dark" :selectedKeys="selectedKeys" mode="inline"  @click="clickMenuItem">
-        <a-menu-item key="home"><a-icon type="pie-chart" /><span>概况</span></a-menu-item>
-        <a-menu-item key="type"><a-icon type="tag"/><span>图像类别</span></a-menu-item>
-        <a-menu-item key="image_info"><a-icon type="instagram"/><span>卫星图像</span></a-menu-item>
-        <a-menu-item key="user"><a-icon type="user" /><span>用户管理</span></a-menu-item>
+        <a-menu-item key="home"><a-icon type="pie-chart" /><span>Survey</span></a-menu-item>
+        <a-menu-item key="type"><a-icon type="tag"/><span>Categories</span></a-menu-item>
+        <a-menu-item key="image_info"><a-icon type="instagram"/><span>Images</span></a-menu-item>
+        <a-menu-item key="user"><a-icon type="user" /><span>Users</span></a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>
@@ -79,13 +79,13 @@ export default {
     let $router = this.$router
     const userMenuItems = [
       {
-        text: '首页',
+        text: 'Homepage',
         action: function () {
           $router.push({ name: 'Homepage' })
         }
       },
       {
-        text: '登出',
+        text: 'Log out',
         action: function () {
           http.user.logout()
             .then((data) => {
@@ -95,7 +95,7 @@ export default {
       },
     ]
     return {
-      footerText: '信息管理系统 ©2019 Created by Jeff Xie',
+      footerText: 'Image Information Manage System ©2019 Created by Jeff Xie',
       collapsed: false,
       routes,
       tabName,

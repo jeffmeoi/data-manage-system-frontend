@@ -63,7 +63,7 @@
               </template>
               <template v-else-if="steps[current].title === 'Waiting'">
                 <div :style="{ margin:'auto', textAlign: 'center', paddingTop: '50px'}">
-                  <p>请打开邮箱查看邮件</p>
+                  <p>Please Open E-mail and Check Out.</p>
                 </div>
               </template>
               <template v-else-if="steps[current].title === 'New Password'">
@@ -89,7 +89,7 @@
               </template>
               <template v-else-if="steps[current].title === 'Done'">
                 <div :style="{ margin:'auto', textAlign: 'center', paddingTop: '50px'}">
-                  <p><a-icon type="check" />成功修改密码，请<a @click="navigateToLogin">重新登录</a>吧</p>
+                  <p><a-icon type="check" />Modify Password Successfully, Please<a @click="navigateToLogin">Log In Again</a></p>
                 </div>
               </template>
             </div>
@@ -125,8 +125,8 @@ export default {
   name: 'ForgetPassword',
   data () {
     return Object.assign({
-      footerText: '信息管理系统 ©2019 Created by Jeff Xie',
-      headline: '信息管理系统',
+      footerText: 'Image Information Manage System ©2019 Created by Jeff Xie',
+      headline: 'Image Information Manage System',
       current: 0,
       steps: [
         {

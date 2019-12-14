@@ -11,7 +11,7 @@
       <a-layout class="content-footer-layout">
         <a-layout-content class="content">
           <div class="register-card">
-            <h1 :style="{marginBottom: '40px', fontSize: '44px'}">欢迎注册</h1>
+            <h1 :style="{marginBottom: '40px', fontSize: '44px'}">Welcome to Register</h1>
             <a-form :form="form" @submit="handleSubmit">
               <a-form-item label="Username">
                 <a-input
@@ -134,8 +134,8 @@ export default {
   name: 'Register',
   data () {
     return Object.assign({
-      footerText: '信息管理系统 ©2019 Created by Jeff Xie',
-      headline: '信息管理系统',
+      footerText: 'Image Information Manage System ©2019 Created by Jeff Xie',
+      headline: 'Image Information Manage System',
     })
   },
   beforeCreate () {
@@ -153,7 +153,7 @@ export default {
         console.log('Received values of form: ', formData)
         http.user.register(formData)
           .then(res => {
-            this.$message.success('注册成功！')
+            this.$message.success('Register Successfully!')
             this.$router.push({
               name: 'Login'
             })
