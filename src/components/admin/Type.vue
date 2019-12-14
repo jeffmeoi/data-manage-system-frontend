@@ -82,7 +82,7 @@
               },
             ]"
             :disabled="addModal.disabled"
-            placeholder="Type Name"/>
+            placeholder="Type Description"/>
         </a-form-item>
       </a-form>
     </a-modal>
@@ -253,13 +253,30 @@ export default {
       return false
     },
     openNotification () {
+      const key = `open${Date.now()}`
       this.$notification.info({
-        message: 'Excel Format Requirement',
-        description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+        message: 'Import Types Sample',
+        description: <p>This is a sample of importing types. <a href="batch/Type.xlsx" target="_blank">Type.xlsx</a></p>,
         style: {
           width: '600px',
           marginLeft: `${335 - 600}px`,
         },
+        btn: h => {
+          return h(
+            'a-button',
+            {
+              props: {
+                type: 'primary',
+                size: 'small',
+              },
+              on: {
+                click: () => this.$notification.close(key),
+              },
+            },
+            'Confirm',
+          )
+        },
+        key,
       })
     },
     confirmDelete (id) {

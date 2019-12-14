@@ -4,7 +4,5 @@ export default {
     userID: '用户ID'
   },
   en: {
-    username: 'Username',
-    userID: 'User ID'
   }
 }

@@ -55,7 +55,7 @@
                   rules: [{ required: true, message: 'Please select a Type!' }]
                 },
               ]"
-              placeholder="Please select a Type"
+              placeholder="Please Select A Type"
             >
               <a-select-option v-for="(item) in types" :value="item.name" :key="item.id">
                 {{item.name}}
@@ -71,7 +71,7 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your Country!',
+                      message: 'Please Input Country!',
                     },
                   ]
                 },
@@ -88,12 +88,12 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your Position!',
+                      message: 'Please Input Position!',
                     },
                   ]
                 },
               ]"
-              placeholder="Position"
+              placeholder="Specific Location"
             />
           </a-form-item>
           <a-form-item label="Resolution Ratio" v-bind="formItemLayout">

@@ -22,7 +22,7 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your Username!',
+                      message: 'Please Input Your Username!',
                     },
                   ]
                 },
@@ -39,7 +39,7 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your Password!',
+                      message: 'Please Input Your Password!',
                     },
                   ]
                 },
@@ -57,7 +57,7 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your Name!',
+                      message: 'Please Input Your Name!',
                     },
                   ]
                 },
@@ -74,7 +74,7 @@
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your E-mail!',
+                      message: 'Please Input Your E-mail!',
                     },
                   ]
                 },
@@ -91,7 +91,7 @@
                   rules: [{ required: true, message: 'Please select a Status!' }]
                 },
               ]"
-              placeholder="Please select a Status"
+              placeholder="Please Select A Identity"
             >
               <a-select-option v-for="(item) in statusList" :value="item.name" :key="item.status">
                 {{item.name}}

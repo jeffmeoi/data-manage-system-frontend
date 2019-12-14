@@ -14,7 +14,7 @@
               <div class="login-card">
                 <h1 :style="{marginBottom: '40px', fontSize: '44px'}">Welcome To Login</h1>
                 <a-form :form="form" @submit="handleSubmit">
-                  <a-form-item :label="strings.username">
+                  <a-form-item label="Username">
                     <a-input
                       size="large"
                       v-decorator="[
@@ -23,12 +23,12 @@
                           rules: [
                             {
                               required: true,
-                              message: 'Please input your Username!',
+                              message: 'Please Input Your Username!',
                             },
                           ],
                         },
                       ]"
-                      :placeholder="strings.username"
+                      placeholder="Username"
                     >
                       <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)" />
                     </a-input>
@@ -38,7 +38,7 @@
                       size="large"
                       v-decorator="[
                         'password',
-                        { rules: [{ required: true, message: 'Please input your Password!' }] },
+                        { rules: [{ required: true, message: 'Please Input Your Password!' }] },
                       ]"
                       type="password"
                       placeholder="Password"
@@ -99,8 +99,6 @@ export default {
       wrapperCol: { span: 20 },
       footerText: 'Image Information Manage System ©2019 Created by Jeff Xie',
       headline: 'Image Information Manage System',
-    }, {
-      strings: strings.zh
     })
   },
   beforeCreate () {

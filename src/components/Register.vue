@@ -21,7 +21,7 @@
                       rules: [
                         {
                           required: true,
-                          message: 'Please input your Username!',
+                          message: 'Please Input Your Username!',
                         },
                       ],
                     },
@@ -36,7 +36,7 @@
                       rules: [
                         {
                           required: true,
-                          message: 'Please input your Password!',
+                          message: 'Please Input Your Password!',
                         },
                       ],
                     },
@@ -52,7 +52,7 @@
                       rules: [
                         {
                           required: true,
-                          message: 'Please confirm your password!',
+                          message: 'Please Confirm Your Password!',
                         },
                         {
                           validator: compareToFirstPassword,
@@ -75,7 +75,7 @@
                         },
                         {
                           required: true,
-                          message: 'Please input your E-mail!',
+                          message: 'Please Input Your E-mail!',
                         },
                       ],
                     },
@@ -93,7 +93,7 @@
                   v-decorator="[
                     'name',
                     {
-                      rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+                      rules: [{ required: true, message: 'Please Input Your Nickname!', whitespace: true }],
                     },
                   ]"
                 />

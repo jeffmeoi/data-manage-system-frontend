@@ -22,7 +22,7 @@
                           rules: [
                             {
                               required: true,
-                              message: 'Please input your Username!',
+                              message: 'Please Input Your Username!',
                             },
                           ],
                         },
@@ -47,7 +47,7 @@
                           rules: [
                             {
                               required: true,
-                              message: 'Please input your E-mail!',
+                              message: 'Please Input Your E-mail!',
                             },
                           ],
                         },
@@ -73,7 +73,7 @@
                       size="large"
                       v-decorator="[
                         'password',
-                        { rules: [{ required: true, message: 'Please input your Password!' }] },
+                        { rules: [{ required: true, message: 'Please Input Iour Password!' }] },
                       ]"
                       type="password"
                       placeholder="New Password"
