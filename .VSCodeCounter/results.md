@@ -1,25 +1,25 @@
 # Summary
 
-Date : 2019-11-23 17:24:38
+Date : 2019-12-15 02:30:13
 
 Directory e:\Projects\VueProjects\data-manage-system\src
 
-Total : 18 files,  3160 codes, 81 comments, 62 blanks, all 3303 lines
+Total : 19 files,  3516 codes, 96 comments, 61 blanks, all 3673 lines
 
 [details](details.md)
 
 ## Languages
 | language | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| Vue | 14 | 2,834 | 3 | 45 | 2,882 |
-| JavaScript | 4 | 326 | 78 | 17 | 421 |
+| Vue | 14 | 2,980 | 3 | 44 | 3,027 |
+| JavaScript | 5 | 536 | 93 | 17 | 646 |
 
 ## Directories
 | path | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| . | 18 | 3,160 | 81 | 62 | 3,303 |
-| components | 13 | 2,812 | 3 | 42 | 2,857 |
-| components\admin | 8 | 1,689 | 0 | 29 | 1,718 |
+| . | 19 | 3,516 | 96 | 61 | 3,673 |
+| components | 13 | 2,958 | 3 | 41 | 3,002 |
+| components\admin | 8 | 1,813 | 0 | 28 | 1,841 |
 | router | 1 | 42 | 0 | 3 | 45 |
 
 [details](details.md)
