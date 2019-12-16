@@ -90,7 +90,6 @@
 
 <script>
 import http from '@/HttpConnector'
-import strings from '@/strings'
 export default {
   name: 'Login',
   data () {
