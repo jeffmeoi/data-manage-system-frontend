@@ -95,7 +95,7 @@ export default {
       },
     ]
     return {
-      footerText: 'Image Information Manage System ©2019 Created by Jeff Xie',
+      footerText: 'Image Management Information System ©2019 Created by Jeff Xie',
       collapsed: false,
       routes,
       tabName,

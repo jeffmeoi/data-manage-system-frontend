@@ -192,7 +192,7 @@ export default {
       },
     ]
     return Object.assign({
-      footerText: 'Image Information Manage System ©2019 Created by Jeff Xie',
+      footerText: 'Image Management Information System ©2019 Created by Jeff Xie',
       host: values.host,
       visibleDrawer: false,
       visibleModal: false,

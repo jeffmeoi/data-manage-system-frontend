@@ -125,8 +125,8 @@ export default {
   name: 'ForgetPassword',
   data () {
     return Object.assign({
-      footerText: 'Image Information Manage System ©2019 Created by Jeff Xie',
-      headline: 'Image Information Manage System',
+      footerText: 'Image Management Information System ©2019 Created by Jeff Xie',
+      headline: 'Image Management Information System',
       current: 0,
       steps: [
         {

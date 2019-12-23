@@ -71,7 +71,7 @@ export default {
     addType: (type = {}) => {
       return requestDecorator(jxios.request({
         requestConfig: {
-          method: 'get',
+          method: 'post',
           url: `/type`,
           headers: {
             'Content-Type': 'application/json'
