@@ -18,8 +18,18 @@
     <a-layout>
       <a-layout-content :style="{ background: 'white', marginLeft: '16px'}">
         <div class="gallery">
-          <a-card v-for="(item) in data" :key="item.id" size="small"  hoverable style="width: 240px; margin: 10px; display:flex; justify-content: center; align-items: center;">
-            <img @click="()=>openPhotoDrawer(item)" slot="cover" :src="host + item.thumbUrl" />
+          <a-card v-for="(item) in data" :key="item.id" size="small"  hoverable style="margin: 10px; ">
+            <div style="width: 240px;overflow: hidden; display:flex; justify-content: center;" slot="cover" >
+              <img @click="(e)=>openPhotoModal(host + item.url)" :src="host + item.thumbUrl" style="height: 240px;" />
+            </div>
+            <a-card-meta
+              :title="item.country">
+              <template slot="description">{{item.position}}</template>
+            </a-card-meta>
+            <template class="ant-card-actions" slot="actions">
+              <a-icon type="picture" @click="(e)=>openPhotoModal(host + item.url)" />
+              <a-icon type="ellipsis" @click="(e)=>openPhotoDrawer(item)" />
+            </template>
           </a-card>
         </div>
         <div style="display: flex; flex-direction: column; align-items: center; margin-top: 100px; margin-bottom: 50px;">
@@ -90,7 +100,7 @@
       {{ footerText }}
     </a-layout-footer>
     <a-modal :zIndex="901" v-model="visibleModal" :footer="null">
-      <a :href="host + imageDetails.url" target="_blank"><img :style="{ width: '100%' }" :src="host + imageDetails.url" /></a>
+      <a :href="modalImageUrl" target="_blank"><img :style="{ width: '100%' }" :src="modalImageUrl" /></a>
     </a-modal>
     <a-drawer
       title="Photo Details"
@@ -150,7 +160,7 @@
           textAlign: 'right',
         }"
       >
-        <a-button @click="(e)=>openPhotoModal(imageDetails.fileUri)">View Picture</a-button>
+        <a-button @click="(e)=>openPhotoModal(host + imageDetails.url)">View Picture</a-button>
         <a-button @click="onClosePhotoDrawer" type="primary">OK</a-button>
       </div>
     </a-drawer>
@@ -202,6 +212,7 @@ export default {
       userMenuItems,
       imageDetails: {},
       cacheFilter: {},
+      modalImageUrl: '',
       userInfo: {},
       pagination: {
         pageSize: 20,
@@ -268,6 +279,7 @@ export default {
     },
     openPhotoModal (imageUri) {
       this.visibleModal = true
+      this.modalImageUrl = imageUri
     },
     onClosePhotoDrawer () {
       this.visibleDrawer = false
